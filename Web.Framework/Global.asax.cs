@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +17,15 @@ namespace Web.Framework
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            SystemWebAdapterConfiguration.AddSystemWebAdapters(this)
+                .AddProxySupport(options => options.UseForwardedHeaders = true)
+                .AddRemoteAppServer(options =>
+                {
+                    // ApiKey is a string representing a GUID
+                    options.ApiKey = ConfigurationManager.AppSettings["RemoteAppApiKey"];
+                })
+                .AddAuthenticationServer();
         }
     }
 }

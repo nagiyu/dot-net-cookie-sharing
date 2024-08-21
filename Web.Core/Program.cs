@@ -1,11 +1,18 @@
 
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSystemWebAdapters();
+builder.Services.AddSystemWebAdapters()
+    .AddRemoteAppClient(options =>
+    {
+        options.RemoteAppUrl = new(builder.Configuration["ReverseProxy:Clusters:fallbackCluster:Destinations:fallbackApp:Address"]);
+        options.ApiKey = builder.Configuration["RemoteAppApiKey"];
+    })
+    .AddAuthenticationClient(true);
 builder.Services.AddHttpForwarder();
 
 // Add services to the container.
