@@ -21,6 +21,7 @@
                     <li>@Html.ActionLink("ホーム", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("詳細", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("問い合わせ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("秘密", "Index", "Private", new { area = "" }, new { @class = "nav-link" })</li>
                     @* ログインしていればログインしたユーザー名とログアウトボタン、ログインしていなければログインボタン *@
                     @if (User.Identity.IsAuthenticated)
                     {
