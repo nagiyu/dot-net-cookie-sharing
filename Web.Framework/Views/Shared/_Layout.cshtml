@@ -21,6 +21,16 @@
                     <li>@Html.ActionLink("ホーム", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("詳細", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("問い合わせ", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @* ログインしていればログインしたユーザー名とログアウトボタン、ログインしていなければログインボタン *@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("ログアウト", "Logout", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="navbar-text">@User.Identity.Name</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("ログイン", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
         </div>

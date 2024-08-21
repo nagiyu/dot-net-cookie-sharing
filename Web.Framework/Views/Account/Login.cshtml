@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "ログイン";
+}
+
+<h2>ログイン</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <label for="username">ユーザー名:</label>
+        <input type="text" name="username" id="username" />
+    </div>
+    <div>
+        <input type="submit" value="ログイン" />
+    </div>
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.Message))
+{
+    <div style="color:red">
+        @ViewBag.Message
+    </div>
+}
