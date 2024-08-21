@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Auth;
+
 namespace Web.Framework.Controllers
 {
-    [Authorize]
+    [CustomAuthorize]
     public class PrivateController : Controller
     {
         // GET: Private
