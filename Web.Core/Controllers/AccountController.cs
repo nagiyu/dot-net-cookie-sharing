@@ -1,44 +1,61 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Framework.Controllers
 {
     public class AccountController : Controller
     {
-        //// ログインフォームを表示
-        //[HttpGet]
-        //public ActionResult Login()
-        //{
-        //    return View();
-        //}
+        // ログインフォームの表示
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
 
-        //// ログインフォームからPOSTされたデータを受け取る
+        //// ログインフォームからPOSTされたデータを処理
         //[HttpPost]
-        //public ActionResult Login(string username)
+        //public async Task<IActionResult> Login(string username)
         //{
         //    if (!string.IsNullOrEmpty(username))
         //    {
-        //        // ユーザー名でログインする（パスワードは省略）
-        //        // TODO ASP.NET メンバーシップは ASP.NET Core Identity に置き換える必要があります。詳細については、https://docs.microsoft.com/aspnet/core/migration/proper-to-2x/membership-to-core-identity を参照してください。
-        //                        FormsAuthentication.RedirectFromLoginPage(username, false);
+        //        // クレーム（認証情報）を作成
+        //        var claims = new List<Claim>
+        //        {
+        //            new Claim(ClaimTypes.Name, username)
+        //        };
 
-        //        // この後、指定したリダイレクト先に転送される
+        //        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        //        var authProperties = new AuthenticationProperties
+        //        {
+        //            IsPersistent = true, // クッキーを永続化するかどうか
+        //        };
+
+        //        // 認証クッキーを設定
+        //        await HttpContext.SignInAsync(
+        //            CookieAuthenticationDefaults.AuthenticationScheme,
+        //            new ClaimsPrincipal(claimsIdentity),
+        //            authProperties);
+
+        //        // ログイン後にリダイレクト
+        //        return RedirectToAction("Index", "Home");
         //    }
         //    else
         //    {
-        //        // ユーザー名が空の場合のエラー処理
         //        ModelState.AddModelError("", "ユーザー名を入力してください。");
         //        return View();
         //    }
-
-        //    // ここには到達しない
-        //    return null;
         //}
 
         //// ログアウト処理
-        //public ActionResult Logout()
+        //public async Task<IActionResult> Logout()
         //{
-        //    // TODO ASP.NET メンバーシップは ASP.NET Core Identity に置き換える必要があります。詳細については、https://docs.microsoft.com/aspnet/core/migration/proper-to-2x/membership-to-core-identity を参照してください。
-        //    FormsAuthentication.SignOut();
+        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         //    return RedirectToAction("Login", "Account");
         //}
     }
